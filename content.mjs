@@ -10,7 +10,7 @@ export const site = {
   name: 'A Modo Mio',
   fullName: 'Pizzeria A Modo Mio',
   vatId: 'P.IVA 13549730961',
-  baseUrl: 'https://gianlu04-afk.github.io', // indirizzo GitHub Pages; da cambiare se si acquista un dominio
+  baseUrl: 'https://a-modo-mio.github.io', // indirizzo GitHub Pages; da cambiare se si acquista un dominio
   locale: 'it_IT',
 };
 
