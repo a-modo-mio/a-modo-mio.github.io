@@ -32,7 +32,7 @@ Tutti gli ordini passano dal numero **0362 915499**, da Just Eat o da Deliveroo.
 
 ## Da confermare
 
-- **Dominio**: oggi è l'indirizzo GitHub Pages (`gianlu04-afk.github.io`), da cambiare in `content.mjs` se si acquista un dominio
+- **Dominio**: oggi è l'indirizzo GitHub Pages (`a-modo-mio.github.io`), da cambiare in `content.mjs` se si acquista un dominio
 
 ## Pubblicazione
 
