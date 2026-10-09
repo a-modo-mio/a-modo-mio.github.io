@@ -193,7 +193,7 @@ const whereBlock = () => `<div class="info-grid">
     <div class="info-block">
       <h3>${icon.pin}Indirizzo</h3>
       <address class="address">${h(site.fullName)}<br>${h(address.street)}<br>${h(address.postalCode)} ${h(address.city)} (${h(address.province)})</address>
-      <p class="muted">Per ordinare chiama il <a href="${tel}">${h(contact.phoneDisplay)}</a>.</p>
+      <p class="muted">Per ordinare chiama il <a href="${tel}">${h(contact.phoneDisplay)}</a> o il cellulare <a href="tel:${contact.mobileE164}">${h(contact.mobileDisplay)}</a>.</p>
       <div class="btn-row">
         <a class="btn btn--primary" href="${directions}" target="_blank" rel="noopener">${icon.pin}Indicazioni stradali</a>
         <a class="btn" href="${tel}">${icon.phone}${h(contact.phoneDisplay)}</a>
@@ -377,6 +377,7 @@ ${body}
         <h2>Contatti</h2>
         <ul>
           <li><a href="${tel}">Tel. ${h(contact.phoneDisplay)}</a></li>
+          <li><a href="tel:${contact.mobileE164}">Cell. ${h(contact.mobileDisplay)}</a></li>
           <li><a href="mailto:${contact.email}">${h(contact.email)}</a></li>
           <li><a href="${contact.instagram}" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="${contact.facebook}" target="_blank" rel="noopener">Facebook</a></li>
@@ -540,7 +541,7 @@ ${ctaBand()}
   return layout({
     path: '/',
     title: `Pizzeria e kebab a Renate (MB) | ${site.fullName}`,
-    description: `${site.fullName} a ${address.city}: pizza nel forno a legna, kebab e fritti. Asporto, consegna a domicilio a € 2 e piccola sala. Aperti tutti i giorni.`,
+    description: `${site.fullName} a ${address.city}: pizza nel forno a legna, kebab e fritti. Asporto, consegna a domicilio a € 2,50 e piccola sala. Aperti tutti i giorni.`,
     body,
     ld: [
       { '@type': 'WebSite', '@id': abs('/#website'), name: site.fullName, url: abs('/'), inLanguage: 'it' },
@@ -599,7 +600,7 @@ function menuPage() {
   <div class="menu-cta reveal">
     <div>
       <h2>Hai scelto? Chiamaci.</h2>
-      <p>Ritiro in pizzeria, oppure consegna a casa con € ${facts.deliveryFee},00 in più (ordine minimo € ${facts.deliveryMinimum},00).</p>
+      <p>Ritiro in pizzeria, oppure consegna a casa con € ${facts.deliveryFee} in più (ordine minimo € ${facts.deliveryMinimum},00).</p>
     </div>
     <div class="btn-row">
       <a class="btn btn--primary btn--lg" href="${tel}">${icon.phone}${h(contact.phoneDisplay)}</a>
@@ -689,7 +690,7 @@ function contactPage() {
   return layout({
     path: '/contatti/',
     title: `Ordina, consegna e orari | ${site.fullName} Renate`,
-    description: `Ordina da ${site.fullName} a ${address.city}: al ${contact.phoneDisplay}, su Just Eat o Deliveroo. Consegna € 2, minimo € 10. Aperti tutti i giorni.`,
+    description: `Ordina da ${site.fullName} a ${address.city}: al ${contact.phoneDisplay}, su Just Eat o Deliveroo. Consegna € 2,50, minimo € 10. Aperti tutti i giorni.`,
     body,
     ld: [breadcrumbLd(crumbs), faqLd('contact')],
   });
@@ -741,7 +742,7 @@ const llms = `# ${site.fullName}, pizzeria e kebab a ${address.city} (${address.
 
 ## Contatti
 - Indirizzo: ${fullAddress}
-- Telefono (per tutti gli ordini): ${contact.phoneDisplay}
+- Telefono (per tutti gli ordini): ${contact.phoneDisplay} · Cellulare: ${contact.mobileDisplay}
 - Email: ${contact.email}
 - Ordini online: Just Eat (${contact.justEat}), Deliveroo
 - Pagamenti: ${facts.payments}
