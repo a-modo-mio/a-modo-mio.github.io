@@ -108,4 +108,93 @@
       map.classList.add('is-loaded');
     });
   });
+
+  // ---------- Galleria 3D circolare ----------
+  document.querySelectorAll('[data-ring]').forEach((ring) => {
+    const stage = ring.querySelector('.ring__stage');
+    const items = [...ring.querySelectorAll('.ring__item')];
+    const n = items.length;
+    if (!n) return;
+    const step = 360 / n;
+    let angle = 0;
+    let target = null;
+    let dragging = false;
+    let hovering = false;
+    let visible = false;
+    let radius = 0;
+    let last = performance.now();
+    let lastScroll = window.scrollY;
+
+    const layout = () => {
+      const w = items[0].offsetWidth;
+      radius = Math.round((w / 2) / Math.tan(Math.PI / n) * 1.3);
+      items.forEach((el, i) => { el.style.transform = `rotateY(${i * step}deg) translateZ(${radius}px)`; });
+    };
+    const paint = () => {
+      stage.style.transform = `translateZ(${-radius}px) rotateY(${-angle}deg)`;
+      items.forEach((el, i) => {
+        const d = Math.abs(((i * step - angle) % 360 + 540) % 360 - 180);
+        el.style.opacity = String(Math.max(0.25, 1 - d / 150));
+        el.style.pointerEvents = d < 60 ? '' : 'none';
+        el.setAttribute('aria-hidden', d < 100 ? 'false' : 'true');
+      });
+    };
+    const goTo = (deg) => { target = deg; };
+    const snap = () => Math.round(angle / step) * step;
+
+    ring.querySelector('[data-ring-prev]').addEventListener('click', () => goTo(snap() - step));
+    ring.querySelector('[data-ring-next]').addEventListener('click', () => goTo(snap() + step));
+    ring.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(snap() - step); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(snap() + step); }
+    });
+    ring.addEventListener('mouseenter', () => { hovering = true; });
+    ring.addEventListener('mouseleave', () => { hovering = false; });
+    ring.addEventListener('focusin', () => { hovering = true; });
+    ring.addEventListener('focusout', () => { hovering = false; });
+
+    let startX = 0;
+    let startAngle = 0;
+    ring.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('button')) return;
+      dragging = true; target = null; startX = e.clientX; startAngle = angle;
+      ring.classList.add('is-dragging');
+      ring.setPointerCapture(e.pointerId);
+    });
+    ring.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      angle = startAngle - (e.clientX - startX) * 0.25;
+    });
+    const endDrag = () => { if (!dragging) return; dragging = false; ring.classList.remove('is-dragging'); goTo(snap()); };
+    ring.addEventListener('pointerup', endDrag);
+    ring.addEventListener('pointercancel', endDrag);
+
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (visible && !reduceMotion && target === null && !dragging) angle += (y - lastScroll) * 0.05;
+      lastScroll = y;
+    }, { passive: true });
+
+    const tick = (now) => {
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+      if (visible) {
+        if (target !== null) {
+          const diff = target - angle;
+          if (Math.abs(diff) < 0.05) { angle = target; target = null; }
+          else angle += diff * Math.min(1, dt * 8);
+        } else if (!dragging && !hovering && !reduceMotion && !document.hidden) {
+          angle += dt * 5;
+        }
+        paint();
+      }
+      requestAnimationFrame(tick);
+    };
+    layout(); paint();
+    window.addEventListener('resize', () => { layout(); paint(); });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }, { rootMargin: '100px' }).observe(ring);
+    } else { visible = true; }
+    requestAnimationFrame(tick);
+  });
 })();

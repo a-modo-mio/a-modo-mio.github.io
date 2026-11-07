@@ -76,6 +76,27 @@ export const promos = [
 ];
 
 // ----------------------------------------------------------------------------
+//  GALLERIA E VIDEO (file in src/media/)
+//  alt: descrizione per chi non vede l'immagine · title/text: didascalia sulla foto
+// ----------------------------------------------------------------------------
+export const gallery = [
+  { file: 'galleria-1.jpg', title: 'Pizza al metro', text: 'Nel forno a legna', alt: 'Una pizza al metro con pomodoro e mozzarella cuoce nel forno a legna, accanto alle fiamme' },
+  { file: 'galleria-2.jpg', title: 'Prosciutto e funghi', text: 'Cotta a legna, pronta da asporto', alt: 'Pizza con prosciutto cotto e funghi nel cartone da asporto, su una tovaglia a fiori' },
+  { file: 'galleria-3.jpg', title: 'Appena sfornata', text: 'La pizza al metro sulla pala', alt: 'Pizza al metro con pomodoro e mozzarella appena uscita dal forno a legna, sulla pala di legno' },
+  { file: 'galleria-4.jpg', title: 'Diavola', text: 'Salame piccante e mozzarella', alt: 'Pizza con salame piccante e mozzarella in un cartone bianco' },
+  { file: 'galleria-5.jpg', title: 'Tre pizze, tre gusti', text: 'Salame piccante, prosciutto e carciofi, patatine', alt: 'Tre cartoni aperti con una pizza al salame piccante, una con prosciutto, funghi e carciofi e una con patatine fritte' },
+  { file: 'galleria-6.jpg', title: 'Dal forno alla pala', text: 'Il momento più bello', alt: 'Una pizza al metro con pomodoro e mozzarella, appena tirata fuori dal forno a mattoni' },
+];
+
+export const video = {
+  file: 'forno.mp4',
+  poster: 'forno-poster.jpg',
+  title: 'Dall’impasto al forno a legna',
+  text: 'L’impasto lavorato a mano e le pizze che entrano nel forno a legna: guarda come nasce quello che ordini.',
+  label: 'Video: un pizzaiolo lavora l’impasto e le pizze cuociono nel forno a legna',
+};
+
+// ----------------------------------------------------------------------------
 //  TESTI
 // ----------------------------------------------------------------------------
 export const copy = {
@@ -89,6 +110,9 @@ export const copy = {
       { value: '€ 2,50', label: 'per la consegna a casa, con ordine minimo di € 10' },
     ],
     promoTitle: 'Le offerte',
+    galleryEyebrow: 'Dal nostro forno',
+    galleryTitle: 'Galleria d’arte di A Modo Mio',
+    galleryLead: 'Pizze, fuoco e mattoni: le nostre opere, una alla volta. Trascina per girare la galleria.',
     featuredTitle: 'Assapora il gusto della Brianza',
     featuredLead: 'Alcune delle nostre speciali si chiamano come i paesi qui intorno.',
     featuredNames: ['Renate', 'Besana', 'Molteno', 'Annone'],

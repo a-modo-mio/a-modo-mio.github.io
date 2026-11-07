@@ -1,10 +1,10 @@
 // Sito della Pizzeria A Modo Mio (versione 1). Genera ./dist da content.mjs. Nessuna dipendenza.
 // Uso: node build.mjs
-import { mkdir, writeFile, copyFile, rm } from 'node:fs/promises';
+import { mkdir, writeFile, copyFile, rm, readdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { deflateSync } from 'node:zlib';
-import { site, contact, address, hours, hoursNote, facts, promos, copy, faq, menu, allergenNames } from './content.mjs';
+import { site, contact, address, hours, hoursNote, facts, promos, copy, faq, menu, allergenNames, gallery, video } from './content.mjs';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const DIST = join(ROOT, 'dist');
@@ -413,6 +413,46 @@ ${body}
 // ---------------------------------------------------------------------------
 const toppingOf = (it) => (/piccante|nduja/i.test(it.desc || '') ? 'hot' : /cotto|crudo|salsiccia|salame|speck|mortadella|bresaola/i.test(it.desc || '') ? 'meat' : /zucchine|peperoni|melanzane|radicchio|trevisana|funghi/i.test(it.desc || '') ? 'veg' : 'classic');
 
+const galleryBlock = (c) => `<section class="section gallery" aria-labelledby="gallery-title">
+  <div class="container">
+    <div class="section__head reveal">
+      <p class="eyebrow">${h(c.galleryEyebrow)}</p>
+      <h2 id="gallery-title">${h(c.galleryTitle)}</h2>
+      <p>${h(c.galleryLead)}</p>
+    </div>
+  </div>
+  <div class="ring" data-ring role="group" aria-roledescription="galleria" aria-label="${h(c.galleryTitle)}" tabindex="0">
+    <ul class="ring__stage list-reset">
+      ${gallery.map((g) => `<li class="ring__item"><figure>
+        <img src="/media/${g.file}" width="750" height="1000" alt="${h(g.alt)}" draggable="false">
+        <figcaption><strong>${h(g.title)}</strong><span>${h(g.text)}</span></figcaption>
+      </figure></li>`).join('')}
+    </ul>
+    <div class="ring__controls">
+      <button class="btn ring__btn" type="button" data-ring-prev aria-label="Foto precedente">${icon.arrow}</button>
+      <button class="btn ring__btn" type="button" data-ring-next aria-label="Foto successiva">${icon.arrow}</button>
+    </div>
+  </div>
+</section>`;
+
+const videoBlock = () => `<section class="section" aria-labelledby="video-title">
+  <div class="container split">
+    <div class="reveal">
+      <h2 id="video-title">${h(video.title)}</h2>
+      <p class="quote">${h(video.text)}</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="/menu/">Scegli la tua pizza ${icon.arrow}</a>
+      </div>
+    </div>
+    <figure class="video reveal">
+      <video controls playsinline preload="none" poster="/media/${video.poster}" aria-label="${h(video.label)}">
+        <source src="/media/${video.file}" type="video/mp4">
+        Il tuo browser non riproduce i video. <a href="/media/${video.file}">Scarica il video</a>.
+      </video>
+    </figure>
+  </div>
+</section>`;
+
 function homePage() {
   const c = copy.home;
   const featured = pick(c.featuredNames, 'pizze');
@@ -450,6 +490,8 @@ ${activePromos.length ? `<section class="section" aria-labelledby="promo-title">
   </div>
 </section>` : ''}
 
+${galleryBlock(c)}
+
 <section class="section section--alt" aria-labelledby="featured-title">
   <div class="container">
     <div class="section__head reveal">
@@ -468,6 +510,8 @@ ${activePromos.length ? `<section class="section" aria-labelledby="promo-title">
     <p style="margin-top:var(--space-5)"><a class="link-arrow" href="/menu/">Vedi tutto il menù: oltre 70 pizze, calzoni, focacce, fritti e dolci ${icon.arrow}</a></p>
   </div>
 </section>
+
+${videoBlock()}
 
 <section class="section" aria-labelledby="kebab-title">
   <div class="container">
@@ -832,4 +876,6 @@ await out('og-image.png', ogImagePng());
 await copyFile(join(ROOT, 'src/styles.css'), join(DIST, 'styles.css'));
 await copyFile(join(ROOT, 'src/main.js'), join(DIST, 'main.js'));
 await copyFile(join(ROOT, 'src/saletta.jpg'), join(DIST, 'saletta.jpg'));
+await mkdir(join(DIST, 'media'), { recursive: true });
+for (const f of await readdir(join(ROOT, 'src/media'))) await copyFile(join(ROOT, 'src/media', f), join(DIST, 'media', f));
 console.log(`✓ Sito generato in dist/ (${BUILD_DATE})`);
