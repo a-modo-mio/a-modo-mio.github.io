@@ -81,11 +81,18 @@ export const promos = [
 // ----------------------------------------------------------------------------
 export const gallery = [
   { file: 'galleria-1.jpg', title: 'Pizza al metro', text: 'Nel forno a legna', alt: 'Una pizza al metro con pomodoro e mozzarella cuoce nel forno a legna, accanto alle fiamme' },
+  { file: 'galleria-7.jpg', title: 'Dentro il forno', text: 'Le pizze iniziano a cuocere', alt: 'Dentro il forno a legna, con le fiamme a sinistra, cuociono diverse pizze, tra cui una con prosciutto cotto e olive nere' },
   { file: 'galleria-2.jpg', title: 'Prosciutto e funghi', text: 'Cotta a legna, pronta da asporto', alt: 'Pizza con prosciutto cotto e funghi nel cartone da asporto, su una tovaglia a fiori' },
+  { file: 'galleria-8.jpg', title: 'Prosciutto crudo', text: 'Fette sottili su mozzarella filante', alt: 'Primo piano di una pizza con fette di prosciutto crudo sopra la mozzarella' },
   { file: 'galleria-3.jpg', title: 'Appena sfornata', text: 'La pizza al metro sulla pala', alt: 'Pizza al metro con pomodoro e mozzarella appena uscita dal forno a legna, sulla pala di legno' },
+  { file: 'galleria-9.jpg', title: 'Radicchio, speck e noci', text: 'Una delle nostre speciali', alt: 'Pizza con radicchio, fette di speck, mozzarella e noci, nel cartone da asporto' },
   { file: 'galleria-4.jpg', title: 'Diavola', text: 'Salame piccante e mozzarella', alt: 'Pizza con salame piccante e mozzarella in un cartone bianco' },
+  { file: 'galleria-10.jpg', title: 'Wurstel', text: 'Un classico per i più piccoli', alt: 'Pizza con pomodoro, mozzarella e rondelle di wurstel nel cartone da asporto' },
   { file: 'galleria-5.jpg', title: 'Tre pizze, tre gusti', text: 'Salame piccante, prosciutto e carciofi, patatine', alt: 'Tre cartoni aperti con una pizza al salame piccante, una con prosciutto, funghi e carciofi e una con patatine fritte' },
+  { file: 'galleria-11.jpg', title: 'Zucchine grigliate', text: 'Mozzarella filante e verdure', alt: 'Pizza con mozzarella filante e zucchine grigliate, in una teglia d’alluminio dentro il cartone' },
   { file: 'galleria-6.jpg', title: 'Dal forno alla pala', text: 'Il momento più bello', alt: 'Una pizza al metro con pomodoro e mozzarella, appena tirata fuori dal forno a mattoni' },
+  { file: 'galleria-12.jpg', title: 'Napoli', text: 'Pomodoro, mozzarella e acciughe', alt: 'Pizza con pomodoro, mozzarella e filetti di acciuga nel cartone da asporto' },
+  { file: 'galleria-13.jpg', title: 'Quattro stagioni', text: 'Prosciutto, olive, funghi e carciofi', alt: 'Pizza quattro stagioni divisa in spicchi con prosciutto cotto, olive nere, funghi e carciofi' },
 ];
 
 export const video = {
