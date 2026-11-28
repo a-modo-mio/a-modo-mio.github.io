@@ -99,8 +99,8 @@ export const video = {
   file: 'forno.mp4',
   poster: 'forno-poster.jpg',
   title: 'Dall’impasto al forno a legna',
-  text: 'L’impasto lavorato a mano e le pizze che entrano nel forno a legna: guarda come nasce quello che ordini.',
-  label: 'Video: un pizzaiolo lavora l’impasto e le pizze cuociono nel forno a legna',
+  text: 'Impasto lavorato a mano, forno a legna e kebab: guarda come nasce quello che ordini.',
+  label: 'Video: il pizzaiolo lancia l’impasto, le pizze entrano nel forno a legna e si prepara il kebab, con musica di sottofondo',
 };
 
 // ----------------------------------------------------------------------------
